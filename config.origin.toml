@@ -1,0 +1,3 @@
+mastodon_token = "mastodon token"
+mastodon_url = "https://your.mastodon.instance"
+max_post_len = 500
