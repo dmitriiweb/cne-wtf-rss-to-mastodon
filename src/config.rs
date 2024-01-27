@@ -7,6 +7,7 @@ pub struct Config {
     pub mastodon_token: String,
     pub mastodon_url: String,
     pub max_post_len: i32,
+    pub rss_url: String,
 }
 
 impl Config {

@@ -1,3 +1,4 @@
 mastodon_token = "mastodon token"
 mastodon_url = "https://your.mastodon.instance"
 max_post_len = 500
+rss_url = "https://cne.wtf/feed"

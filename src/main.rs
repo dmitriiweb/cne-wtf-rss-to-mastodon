@@ -1,8 +1,10 @@
+pub mod cne_rss;
 pub mod config;
 
 use clap::Parser;
 use log::error;
 
+use cne_rss::RssFeed;
 use config::Config;
 
 #[derive(Parser, Debug)]
@@ -19,5 +21,11 @@ fn main() {
         error!("Can't parse cli arguments: {}", err);
         std::process::exit(1);
     });
-    println!("{:?}", config);
+    let rss_feed = RssFeed::new(&config).unwrap_or_else(|err| {
+        error!("Can't get rss feed: {}", err);
+        std::process::exit(1);
+    });
+    for i in rss_feed.iter() {
+        println!("{:?}", i);
+    }
 }
