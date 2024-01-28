@@ -21,11 +21,12 @@ fn main() {
         error!("Can't parse cli arguments: {}", err);
         std::process::exit(1);
     });
-    let rss_feed = RssFeed::new(&config).unwrap_or_else(|err| {
+    let rss_feeds = RssFeed::new(&config).unwrap_or_else(|err| {
         error!("Can't get rss feed: {}", err);
         std::process::exit(1);
     });
-    for i in rss_feed.iter() {
+    let filtered_feeds = RssFeed::filter_by_url(rss_feeds, &config);
+    for i in filtered_feeds.iter() {
         println!("{:?}", i);
     }
 }
