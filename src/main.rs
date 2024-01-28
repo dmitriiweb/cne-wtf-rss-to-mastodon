@@ -1,11 +1,13 @@
 pub mod cne_rss;
 pub mod config;
+pub mod mastodon;
 
 use clap::Parser;
 use log::error;
 
 use cne_rss::RssFeed;
 use config::Config;
+use mastodon::MastodonApi;
 
 #[derive(Parser, Debug)]
 struct CliArgs {
@@ -26,7 +28,7 @@ fn main() {
         std::process::exit(1);
     });
     let filtered_feeds = RssFeed::filter_by_url(rss_feeds, &config);
-    for i in filtered_feeds.iter() {
-        println!("{:?}", i);
-    }
+
+    let mastodon = MastodonApi::new(&config);
+    mastodon.publish_posts(&filtered_feeds);
 }
